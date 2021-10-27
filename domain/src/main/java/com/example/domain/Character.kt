@@ -1,7 +1,9 @@
 package com.example.domain
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "character")
 class Character {
 
     @SerializedName("id")

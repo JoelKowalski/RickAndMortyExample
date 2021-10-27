@@ -1,4 +1,47 @@
 package com.example.data.repository
 
-class CharacterRepository {
+import com.example.data.DataManager
+import com.example.data.api.CharacterApi
+import com.example.data.api.extension.buildApi
+import com.example.data.repository.base.BaseRepository
+import com.example.data.repository.base.LocalRepository
+import com.example.data.repository.base.RemoteRepository
+import com.example.data.repository.extension.error
+import com.example.domain.Character
+
+class CharacterRepository : BaseRepository() {
+
+    override val local = Local()
+    override val remote = Remote()
+
+    class Local : LocalRepository() {
+
+        private var characterDao = DataManager.database.favCharacter()
+
+
+        /**
+         * Stores the given character
+         */
+        suspend fun saveFavCharacter(
+            character: Character
+        ) = characterDao.insert(character)
+
+        /**
+         * Removes the character
+         */
+        suspend fun removeFavCharacter(
+            character: Character
+        ) = characterDao.delete(character)
+    }
+
+    class Remote : RemoteRepository() {
+        private val characterApi: CharacterApi = buildApi()
+
+        fun getCharacters(page:Int
+        ): MutableList<Character> {
+            val response = characterApi.getAllCharacters(page)
+            return  response.body() as MutableList<Character>
+        }
+    }
 }
+
