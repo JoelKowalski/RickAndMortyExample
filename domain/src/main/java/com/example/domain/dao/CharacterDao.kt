@@ -15,7 +15,7 @@ interface CharacterDao {
     @Query(
         "SELECT * FROM character WHERE id LIKE :id"
     )
-    suspend fun findById(id: String, type: String): Character
+    suspend fun findById(id: String): Character
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(character: Character)

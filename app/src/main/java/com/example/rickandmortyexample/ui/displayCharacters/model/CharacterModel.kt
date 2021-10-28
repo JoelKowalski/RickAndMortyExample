@@ -1,18 +1,19 @@
 package com.example.rickandmortyexample.ui.displayCharacters.model
 
+import com.example.data.repository.CharacterRepository
 import com.example.domain.Character
 import com.example.rickandmortyexample.ui.base.BaseModel
 import com.example.rickandmortyexample.ui.displayCharacters.extension.io
-import com.example.usecase.AllCharacterGetter
 
 class CharacterModel: BaseModel() {
 
-    private lateinit var cha: AllCharacterGetter
+    private lateinit var characterRepository: CharacterRepository
 
-    fun getCharacters(callback: (response: MutableList<Character>?) -> Unit) {
+    fun getCharacters(callback: (response: List<Character>?) -> Unit) {
+        characterRepository = CharacterRepository()
         io {
-            val conversation = cha.invoke(2)
-            callback(conversation)
+            val characters = characterRepository.remote.getCharacters(1)
+            callback(characters)
         }
     }
 }

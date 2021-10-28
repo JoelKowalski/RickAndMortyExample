@@ -10,8 +10,8 @@ import retrofit2.http.Query
 interface CharacterApi {
 
 
-    @GET("/character")
-     fun getAllCharacters(
+    @GET("character")
+    suspend fun getAllCharacters(
         @Query("page") page: Int
-    ): Response<MutableList<Character>>
+    ): Response<CharacterResponseApi>
 }

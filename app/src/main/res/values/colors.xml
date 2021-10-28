@@ -4,6 +4,11 @@
     <color name="colorPrimaryDark">#2286c3</color>
     <color name="colorAccent">#cddc39</color>
 
+    <color name="colorSecundary">#ccdb38</color>
+    <color name="colorSecundaryDark">#98aa00</color>
+
+    ccdb38
+
     <color name="background_general">#D7DADA</color>
     <color name="colorTransparentFavorite">#BBD81B60</color>
     <color name="colorTransparentAccent">#BB0099CC</color>

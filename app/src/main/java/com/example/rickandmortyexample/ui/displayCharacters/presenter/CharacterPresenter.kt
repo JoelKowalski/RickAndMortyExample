@@ -9,6 +9,6 @@ class CharacterPresenter (view: CharacterView) : BaseCharacterPresenter(view) {
     }
 
     override fun getCharacters() {
-        model.getCharacters { view.getCharacters(it) }
+        model.getCharacters { view.prepareCharacters(it!!) }
     }
 }

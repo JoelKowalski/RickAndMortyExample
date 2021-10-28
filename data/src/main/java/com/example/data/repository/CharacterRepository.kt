@@ -37,11 +37,17 @@ class CharacterRepository : BaseRepository() {
     class Remote : RemoteRepository() {
         private val characterApi: CharacterApi = buildApi()
 
-        fun getCharacters(page:Int
-        ): MutableList<Character> {
+        suspend fun getCharacters(page:Int): List<Character>? {
+            var characterList: List<Character>? = null
+
             val response = characterApi.getAllCharacters(page)
-            return  response.body() as MutableList<Character>
+            if (response.isSuccessful){
+                characterList = response.body()?.results
+            }
+            return characterList
+
         }
     }
 }
+
 
